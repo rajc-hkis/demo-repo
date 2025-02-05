@@ -5,6 +5,7 @@ export interface IRegisterUser {
   email: string;
   password: string;
   name: string;
+  inviteCode?: string;
 }
 
 export interface IRegisterUserResponse extends IResponseBody {

@@ -3,7 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { env } from './config/env';
 import { connectDatabase, disconnectDatabase, checkDatabaseHealth } from './config/database';
-import apiRoutes from './routes/api.routes';
+import apiRoutes from './routes/api.route';
 import './module-alias-setup';
 
 const createApp = (): Express => {
