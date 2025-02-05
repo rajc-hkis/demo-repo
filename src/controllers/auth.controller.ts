@@ -13,7 +13,6 @@ export const registerUser = async (req: Request<unknown, unknown, IRegisterUser>
       },
     });
 
-    // User already exists so return error
     if (userExists) {
       res.status(409).json({ message: 'User already exists', status: false, user: null });
       return;
