@@ -29,7 +29,6 @@ export const registerUser = async (req: Request<unknown, unknown, IRegisterUser>
         },
       });
     } else {
-      // Take money from user
       await prisma.user.findMany({
         where: {
           deletedAt: null,
