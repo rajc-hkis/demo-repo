@@ -34,4 +34,5 @@ export const registerValidator = Joi.object({
   name: Joi.string().required().label('Name'),
   email: Joi.string().email().required().label('Email'),
   password: Joi.string().min(6).required().label('Password'),
+  inviteCode: Joi.string().optional().label('Invite Code'),
 });

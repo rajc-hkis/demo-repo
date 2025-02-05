@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 
 export const registerUser = async (req: Request<unknown, unknown, IRegisterUser>, res: Response<IRegisterUserResponse>): Promise<void> => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, name, inviteCode } = req.body;
 
     // Check if user already exists
     const userExists = await prisma.user.findFirst({
@@ -15,8 +15,26 @@ export const registerUser = async (req: Request<unknown, unknown, IRegisterUser>
 
     // User already exists so return error
     if (userExists) {
-      res.status(400).json({ message: 'User already exists', status: false, user: null });
+      res.status(409).json({ message: 'User already exists', status: false, user: null });
       return;
+    }
+
+    if (inviteCode) {
+      // go to database and give rewards to user
+      await prisma.user.create({
+        data: {
+          email,
+          password,
+          name,
+        },
+      });
+    } else {
+      // Take money from user
+      await prisma.user.findMany({
+        where: {
+          deletedAt: null,
+        },
+      });
     }
 
     // Create user

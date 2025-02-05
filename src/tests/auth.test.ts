@@ -34,7 +34,7 @@ describe('Auth Controller', () => {
         password: createUserMock.password,
       });
 
-      expect(response.status).toBe(400);
+      expect(response.status).toBe(409);
       expect(response.body.status).toBe(false);
     });
   });
